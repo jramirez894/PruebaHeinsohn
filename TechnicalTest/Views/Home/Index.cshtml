@@ -1,0 +1,72 @@
+﻿@model List<Products>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="~/js/Products.js"></script>
+<div class="text-center">
+    <h3 class="display-4">Bienvenido, Sistema de Pedidos</h3>
+
+    <label for="site-search">Buscar producto:</label>
+    <input type="search" id="searchProduct" name="searchProduct" placeholder="ej: codigo, nombre, categoría">
+    <button onclick="SearchProduct();">Buscar</button>
+    <br>
+
+    <form id="formAddProduct" style="display:none">
+        <label for="pName">Nombre Producto:</label><br>
+        <input type="text" id="pName" name="pName" disabled><br>
+
+        <label for="customer">Cliente:</label><br>
+        <input type="text" id="customer" name="customer" disabled><br>
+
+        <label for="catName">Categoría:</label><br>
+        <input type="text" id="catName" name="catName" disabled><br>
+
+        <label for="quantity">Cantidad:</label><br>
+        <input type="number" id="quantity" name="quantity"><br>
+
+        <label for="pPrice">Precio:</label><br>
+        <input id="pPrice" name="pPrice" disabled><br>
+
+        <label for="totSale">Total:</label><br>
+        <input id="totSale" name="totSale" disabled><br><br><br>
+    </form>
+    <button id="btnAddProduct" onclick="AddProduct()" style="display:none">Agregar</button>
+    <br />
+    <br />
+    <button id="btnFinish" onclick="FinishSale()" style="display:none">Finalizar Pedido</button>
+
+    <table style="width:100%" id="tableAllProduct">
+        <caption>Listado de productos</caption>
+        <tr>
+            <th>código</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Cantidad Disponible</th>
+            <th>Estado</th>
+        </tr>
+        @if (Model != null)
+        {
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Model[i].pId</td>
+                    <td>@Model[i].pName</td>
+                    <td>@Model[i].catName</td>
+                    <td>@Model[i].quantity</td>
+                    @if (Model[i].pState == 1)
+                    {
+                        <td>Activo</td>
+                    }
+                    else
+                    {
+                        <td>Desactivado</td>
+                    }
+
+                </tr>
+            }
+        }
+
+    </table>
+    <br>
+
+</div>
